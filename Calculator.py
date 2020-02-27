@@ -37,8 +37,8 @@ def calc():
             break
     #if invalid expression        
     try:        
-        a=int(s[:k])#stores first number
-        b=int(s[k+1:])#stores second number
+        a=float(s[:k])#stores first number
+        b=float(s[k+1:])#stores second number
         msg=s[k]#stores operator
     except:
            text = font.render("Invalid Input", True, (0, 0, 255))     
@@ -138,7 +138,29 @@ def button_num(msg,x,y,w,h):
         pygame.draw.rect(screen, (200,127,168),(x,y,w,h), 0)
     #draw text on button
     screen.blit(text,(x+3,y+3))
-    
+
+#for click on numbers
+def button_decimal(msg,x,y,w,h):
+    mouse=pygame.mouse.get_pos()
+    click=pygame.mouse.get_pressed()
+    global E,i,s 
+    text = font.render(msg, True, (0, 255, 0)) 
+    if x+w > mouse[0] > x and y+h > mouse[1] > y:   #if mouse pointer is over button
+        pygame.draw.rect(screen, (225,225,225),(x,y,w,h), 0)
+        
+        if(click[0]==1):
+            pygame.draw.rect(screen, (225,0,0),(x,y,w,h), 0)
+            s=s+msg         
+            time.sleep(.1)
+            screen.blit(text,(100+E,250))
+            E=E+10
+            return    
+            
+    else:
+        pygame.draw.rect(screen, (200,127,168),(x,y,w,h), 0)
+    #draw text on button
+    screen.blit(text,(x+3,y+3))
+        
 #draw all buttons    
 def draw():
     button_num('1',A,B,C,D)
@@ -157,7 +179,7 @@ def draw():
     button_symbol('/',A-x,B+3*x,C,D)
     button_clear('C',A+2*x,B+3*x,C,D)
     button_equal('=',A,B+3*x,C,D)
-    
+    button_decimal('.',A-x,B+4*x,C,D)
 while True:
     draw()    
     pygame.display.update()    
