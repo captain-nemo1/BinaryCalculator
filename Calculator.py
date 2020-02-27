@@ -1,4 +1,4 @@
-#Simple Binary calculator for values less than 10
+#Simple Binary calculator 
 import random
 import pygame
 import sys
